@@ -21,7 +21,7 @@ public class AudioManager {
 
     public static void playMusic(Clip music, long delay){
         class runAudio implements Runnable{
-
+            //TODO audio needs debugging
             @Override
             public void run() {
                 Timer timer = new Timer();
@@ -29,22 +29,17 @@ public class AudioManager {
                 TimerTask startMusic = new TimerTask() {
                     @Override
                     public void run() {
-                       music.start();
-                    }
-                };
-
-                TimerTask possiblyStopMusic = new TimerTask() {
-                    //TODO use of audio button needs to be fixed
-                    @Override
-                    public void run() {
-                        if(dataUtil.SOUND_SETTTING.equals("OFF") && !music.isActive()){
-                            music.stop();
-                        }
+                        music.start();
                     }
                 };
                 music.start();
                 timer.schedule(startMusic, delay);
-                timer.schedule(possiblyStopMusic, 1000);
+
+                do {
+                    if(dataUtil.SOUND_SETTTING.equals("OFF")){
+                        music.stop();
+                    }
+                }while (!dataUtil.SOUND_SETTTING.equals("OFF"));
             }
         }
         Thread audioThread = new Thread(new runAudio());

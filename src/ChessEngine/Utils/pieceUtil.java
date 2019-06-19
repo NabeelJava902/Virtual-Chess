@@ -52,12 +52,12 @@ public class pieceUtil {
 
     public static List<Integer> getValidDestinations(Piece piece, gameGrid g){
         int currentLoc;
-        List<Integer> validnewLocs = new ArrayList<>();
+        List<Integer> destinations = new ArrayList<>();
         for(int currentValidCandidate : piece.getLegalMoves(g)){
             currentLoc = piece.location;
             currentLoc += currentValidCandidate;
-            validnewLocs.add(currentLoc);
+            destinations.add(currentLoc);
         }
-        return validnewLocs;
+        return destinations;
     }
 }

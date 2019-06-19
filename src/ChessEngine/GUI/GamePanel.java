@@ -59,19 +59,43 @@ public class GamePanel extends JFrame {
             }
         });
 
-        /*Clip pianoMusic = AudioManager.getLoadedClip("chess_background_music");
-        while (true){
-            AudioManager.playMusic(pianoMusic, 207000);
-        }*/
+        Clip pianoMusic = AudioManager.getLoadedClip("chess_background_music");
+        AudioManager.playMusic(pianoMusic, 207000);
     }
 
     private void setUpPieces() {
-        setPiece(57, dataUtil.blackKnight);
-        setPiece(62, dataUtil.blackKnight);
-        setPiece(58, dataUtil.blackBishop);
-        setPiece(43, dataUtil.whiteKnight);
-        setPiece(32, dataUtil.whiteRook);
-        gridUtil.printGrid(g);
+        setPiece(56, dataUtil.whiteRook);
+        setPiece(48, dataUtil.whitePawn);
+        setPiece(63, dataUtil.whiteRook);
+        setPiece(55, dataUtil.whitePawn);
+        setPiece(57, dataUtil.whiteKnight);
+        setPiece(49, dataUtil.whitePawn);
+        setPiece(62, dataUtil.whiteKnight);
+        setPiece(54, dataUtil.whitePawn);
+        setPiece(58, dataUtil.whiteBishop);
+        setPiece(50, dataUtil.whitePawn);
+        setPiece(61, dataUtil.whiteBishop);
+        setPiece(53, dataUtil.whitePawn);
+        setPiece(59, dataUtil.whiteKing);
+        setPiece(51, dataUtil.whitePawn);
+        setPiece(60, dataUtil.whiteQueen);
+        setPiece(52, dataUtil.whitePawn);
+        setPiece(0, dataUtil.blackRook);
+        setPiece(8, dataUtil.blackPawn);
+        setPiece(7, dataUtil.blackRook);
+        setPiece(15, dataUtil.blackPawn);
+        setPiece(1, dataUtil.blackKnight);
+        setPiece(9, dataUtil.blackPawn);
+        setPiece(6, dataUtil.blackKnight);
+        setPiece(14, dataUtil.blackPawn);
+        setPiece(2, dataUtil.blackBishop);
+        setPiece(10, dataUtil.blackPawn);
+        setPiece(5, dataUtil.blackBishop);
+        setPiece(13, dataUtil.blackPawn);
+        setPiece(3, dataUtil.blackKing);
+        setPiece(11, dataUtil.blackPawn);
+        setPiece(4, dataUtil.blackQueen);
+        setPiece(12, dataUtil.blackPawn);
     }
 
     private void setPiece(int location, ImageIcon img) {
@@ -82,96 +106,96 @@ public class GamePanel extends JFrame {
         pieceUtil.addPiece(g, img, location);
     }
 
-    private boolean isValidMove(int i, int j) {
-        int finalPos = linkEngineToGui.arrayToArrayList(i, j);
-        int currentPos;
-        try {
-            currentPos = pieceTile.piece.location;
-        }catch (NullPointerException e){
-            currentPos = 0;
-        }
-
-        return pieceTile.piece.getLegalMoves(g).contains((currentPos - finalPos) * -1);
-    }
-
-    private void processClick(int i, int j) {
-        if (!isValidMove(i, j)) {
-            pieceTile = null;
-            return;
-        }
-        tiles[pieceTile.row][pieceTile.col].setIcon(null);
-        tiles[i][j].setIcon(pieceTile.img);
-    }
-
     private void gameOver(){
-        JOptionPane.showMessageDialog(this, "Game Over");
+        String message = "Check Mate, "+gridUtil.findWinner(pieceTile.piece, g)+" wins.";
+        JOptionPane.showMessageDialog(this, message);
         dispose();
     }
 
     private class ButtonHandler implements ActionListener {
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if(pieceTile == null) {
-                Object source = e.getSource();
-                for (int i = 0; i < 8; i++) {
-                    for (int j = 0; j < 8; j++) {
-                        if (source == tiles[i][j]) {
-                            if(g.emptyPiecesGrid.get(linkEngineToGui.arrayToArrayList(i, j)).alliance == Alliances.BLACK && activeTurnPanel.activeTurn.getText().equals("BLACK TURN")) {
-                                pieceTile = clickedTile.assignClickedTile(linkEngineToGui.arrayToArrayList(i, j), tiles[i][j]);
-                                try {
-                                    highlightValidMove(pieceTile.piece);
-                                }catch (Exception ex) {}
-                            }else if(g.emptyPiecesGrid.get(linkEngineToGui.arrayToArrayList(i, j)).alliance == Alliances.WHITE && activeTurnPanel.activeTurn.getText().equals("WHITE TURN")){
-                                pieceTile = clickedTile.assignClickedTile(linkEngineToGui.arrayToArrayList(i, j), tiles[i][j]);
-                                try {
-                                    highlightValidMove(pieceTile.piece);
-                                }catch (Exception ex) {}
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(pieceTile == null) {
+                    Object source = e.getSource();
+                    for (int i = 0; i < 8; i++) {
+                        for (int j = 0; j < 8; j++) {
+                            if (source == tiles[i][j]) {
+                                if(g.emptyPiecesGrid.get(linkEngineToGui.arrayToArrayList(i, j)).alliance == Alliances.BLACK && activeTurnPanel.activeTurn.getText().equals("BLACK TURN")) {
+                                    pieceTile = clickedTile.assignClickedTile(linkEngineToGui.arrayToArrayList(i, j), tiles[i][j]);
+                                    try {
+                                        highlightValidMove(pieceTile.piece);
+                                    }catch (Exception ex) {}
+                                }else if(g.emptyPiecesGrid.get(linkEngineToGui.arrayToArrayList(i, j)).alliance == Alliances.WHITE && activeTurnPanel.activeTurn.getText().equals("WHITE TURN")){
+                                    pieceTile = clickedTile.assignClickedTile(linkEngineToGui.arrayToArrayList(i, j), tiles[i][j]);
+                                    try {
+                                        highlightValidMove(pieceTile.piece);
+                                    }catch (Exception ex) {}
+                                }
                             }
                         }
                     }
-                }
-            }else{
-                Object source = e.getSource();
-                int iLoc=0, jLoc=0;
-                for (int i = 0; i < 8; i++) {
-                    for (int j = 0; j < 8; j++) {
-                        if (source == tiles[i][j]) {
-                            pieceAtDestination = gridUtil.findPieceFromLocation(linkEngineToGui.arrayToArrayList(i, j), g);
-                            sidePanel.updateText();
-                            processClick(i, j);
-                            iLoc = i;
-                            jLoc = j;
-                            switchTurn(i, j);
-                            removeHighlight();
+                }else{
+                    Object source = e.getSource();
+                    int iLoc=0, jLoc=0;
+                    for (int i = 0; i < 8; i++) {
+                        for (int j = 0; j < 8; j++) {
+                            if (source == tiles[i][j]) {
+                                pieceAtDestination = gridUtil.findPieceFromLocation(linkEngineToGui.arrayToArrayList(i, j), g);
+                                sidePanel.updateText();
+                                processClick(i, j);
+                                iLoc = i;
+                                jLoc = j;
+                                switchTurn(i, j);
+                                removeHighlight();
 
-                            try {
-                                if (pieceAtDestination.pieceType != pieceTypes.EMPTY && pieceAtDestination.alliance != pieceTile.piece.alliance
-                                        && dataUtil.SOUND_SETTTING.equals("ON")) {
-                                    class runAudio implements Runnable {
+                                try {
+                                    if (pieceAtDestination.pieceType != pieceTypes.EMPTY && pieceAtDestination.alliance != pieceTile.piece.alliance
+                                            && dataUtil.SOUND_SETTTING.equals("ON")) {
+                                        class runAudio implements Runnable {
 
-                                        @Override
-                                        public void run() {
-                                            Clip audio = AudioManager.getLoadedClip("chess_destroy_sound");
-                                            audio.start();
+                                            @Override
+                                            public void run() {
+                                                Clip audio = AudioManager.getLoadedClip("chess_destroy_sound");
+                                                audio.start();
+                                            }
                                         }
+                                        Thread audioThread = new Thread(new runAudio());
+                                        audioThread.start();
                                     }
-                                    Thread audioThread = new Thread(new runAudio());
-                                    audioThread.start();
-                                }
-                            }catch (NullPointerException el){}
+                                }catch (NullPointerException el){}
+                            }
                         }
                     }
+                    try {
+                        Move move = new Move(linkEngineToGui.arrayToArrayList(iLoc, jLoc), pieceTile.piece);
+                        g.emptyPiecesGrid = move.normalMove(g);
+                        if(gridUtil.checkForKingInRange(pieceTile.piece, g)){
+                            gameOver();
+                        }
+                    }catch(Exception exc){}
+                    pieceTile = null;
                 }
-                try {
-                    Move move = new Move(linkEngineToGui.arrayToArrayList(iLoc, jLoc), pieceTile.piece);
-                    g.emptyPiecesGrid = move.normalMove(g);
-                    if(gridUtil.checkForKingInRange(pieceTile.piece, g)){
-                        gameOver();
-                    }
-                }catch(Exception exc){}
-                pieceTile = null;
             }
+        private boolean isValidMove(int i, int j) {
+            int finalPos = linkEngineToGui.arrayToArrayList(i, j);
+            int currentPos;
+            try {
+                currentPos = pieceTile.piece.location;
+            }catch (NullPointerException e){
+                currentPos = 0;
+            }
+
+            return pieceTile.piece.getLegalMoves(g).contains((currentPos - finalPos) * -1);
+        }
+
+        private void processClick(int i, int j) {
+            if (!isValidMove(i, j)) {
+                pieceTile = null;
+                return;
+            }
+            tiles[pieceTile.row][pieceTile.col].setIcon(null);
+            tiles[i][j].setIcon(pieceTile.img);
         }
 
         private void switchTurn(int i, int j){

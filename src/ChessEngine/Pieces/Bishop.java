@@ -29,7 +29,10 @@ public class Bishop extends Piece {
                 } else if (g.emptyPiecesGrid.get(destination).alliance != this.alliance) {
                     validCandidates.add(nextMove);
                     break;
-                }if (gridUtil.contains(destination, gridUtil.FIRST_COLUMN) || gridUtil.contains(destination, gridUtil.EIGHTH_COLUMN)) {
+                }else if(g.emptyPiecesGrid.get(destination).alliance == this.alliance){
+                    break;
+                }
+                if (gridUtil.contains(destination, gridUtil.FIRST_COLUMN) || gridUtil.contains(destination, gridUtil.EIGHTH_COLUMN)) {
                     break;
                 }
                 nextMove += currentMove;

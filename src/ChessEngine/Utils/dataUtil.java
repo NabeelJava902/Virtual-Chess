@@ -20,6 +20,7 @@ public class dataUtil {
 
     public static String SOUND_SETTTING = "ON";
     public static String ACTIVE_TURN = "WHITE TURN";
+    public static boolean continueMusic = true;
 
     private dataUtil(){}
 

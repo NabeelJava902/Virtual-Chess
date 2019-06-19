@@ -29,7 +29,10 @@ public class Rook extends Piece {
                 } else if (g.emptyPiecesGrid.get(destination).alliance != this.alliance) {
                     validCandidates.add(nextMove);
                     break;
-                }if (gridUtil.contains(destination, gridUtil.FIRST_COLUMN) && !gridUtil.contains(this.location, gridUtil.FIRST_COLUMN)){
+                }else if(g.emptyPiecesGrid.get(destination).alliance == this.alliance){
+                    break;
+                }
+                if (gridUtil.contains(destination, gridUtil.FIRST_COLUMN) && !gridUtil.contains(this.location, gridUtil.FIRST_COLUMN)){
                     break;
                 }else if(gridUtil.contains(destination, gridUtil.EIGHTH_COLUMN) && !gridUtil.contains(this.location, gridUtil.EIGHTH_COLUMN)){
                     break;

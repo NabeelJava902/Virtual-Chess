@@ -3,7 +3,6 @@ package ChessEngine.Board;
 import ChessEngine.Pieces.Alliances;
 import ChessEngine.Pieces.Piece;
 import ChessEngine.Pieces.pieceTypes;
-import ChessEngine.Utils.gridUtil;
 
 import java.util.ArrayList;
 
@@ -24,8 +23,6 @@ public class Move {
         g.emptyPiecesGrid.get(loc).alliance = Alliances.EMPTY;
         g.emptyPiecesGrid.get(loc).pieceType = pieceTypes.EMPTY;
         g.emptyPiecesGrid.get(loc).MOVE_CANDIDATES = null;
-
-        gridUtil.printGrid(g);
 
         return g.emptyPiecesGrid;
     }

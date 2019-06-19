@@ -1,6 +1,7 @@
 package ChessEngine.Utils;
 
 import ChessEngine.Board.gameGrid;
+import ChessEngine.Pieces.Alliances;
 import ChessEngine.Pieces.Piece;
 import ChessEngine.Pieces.pieceTypes;
 
@@ -86,15 +87,27 @@ public class gridUtil {
     }
 
     public static boolean checkForKingInRange(Piece piece, gameGrid g){
-        //sensor for queen in range not running
         //TODO fix functionality in detecting king in legalMoves
         boolean kingInRange = false;
-        for(int currentMove : piece.MOVE_CANDIDATES){
-            int destinationLoc = piece.location + currentMove;
-            if(findPieceFromLocation(destinationLoc, g).pieceType == pieceTypes.KING){
+        for(int i : pieceUtil.getValidDestinations(piece, g)){
+            if(g.emptyPiecesGrid.get(i).pieceType == pieceTypes.KING && g.emptyPiecesGrid.get(i).alliance != piece.alliance){
                 kingInRange = true;
             }
         }
         return kingInRange;
+    }
+
+    public static Alliances findWinner(Piece piece, gameGrid g){
+        Alliances winner = null;
+        for(int i : pieceUtil.getValidDestinations(piece, g)){
+            if(g.emptyPiecesGrid.get(i).pieceType == pieceTypes.KING && g.emptyPiecesGrid.get(i).alliance != piece.alliance){
+                if(g.emptyPiecesGrid.get(i).alliance == Alliances.BLACK){
+                    winner = Alliances.BLACK;
+                }else if(g.emptyPiecesGrid.get(i).alliance == Alliances.WHITE){
+                    winner = Alliances.WHITE;
+                }
+            }
+        }
+        return winner;
     }
 }

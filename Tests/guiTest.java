@@ -1,14 +1,16 @@
-import ChessEngine.GUI.GamePanel;
-import ChessEngine.GUI.testingBoard;
+import GUI.GamePanel;
+import GUI.testingBoard;
 
 import javax.swing.*;
 
 public class guiTest {
+    private static JFrame choosePanel = new JFrame("Tester");
     public static void main(String[] args){
-        JFrame choosePanel = new JFrame("Tester");
+        choosePanel = new JFrame("Tester");
         choosePanel.setVisible(true);
         choosePanel.setSize(300, 300);
         choosePanel.setLocationRelativeTo(null);
+        choosePanel.setResizable(false);
         choosePanel.setLayout(new BoxLayout(choosePanel.getContentPane(), BoxLayout.PAGE_AXIS));
 
         JButton gameButton = new JButton("Start Game");
@@ -22,8 +24,10 @@ public class guiTest {
     }
     private static void runGamePanel(){
         new GamePanel();
+        choosePanel.dispose();
     }
     private static void runTestingBoard(){
         new testingBoard();
+        choosePanel.dispose();
     }
 }

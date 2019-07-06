@@ -1,8 +1,8 @@
-import ChessEngine.Board.gameGrid;
-import ChessEngine.Pieces.Alliances;
-import ChessEngine.Pieces.Knight;
-import ChessEngine.Pieces.pieceTypes;
-import ChessEngine.Utils.pieceUtil;
+import Board.gameGrid;
+import Pieces.Alliances;
+import Pieces.Knight;
+import Pieces.pieceTypes;
+import Utils.pieceUtil;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-import ChessEngine.Board.Move;
-import ChessEngine.Board.gameGrid;
-import ChessEngine.Pieces.Alliances;
-import ChessEngine.Pieces.Knight;
-import ChessEngine.Pieces.pieceTypes;
+import Board.Move;
+import Board.gameGrid;
+import Pieces.Alliances;
+import Pieces.Knight;
+import Pieces.pieceTypes;
 
 public class movePieceTest {
     public static void main(String[] args){

@@ -1,6 +1,6 @@
-package ChessEngine.Pieces;
+package Pieces;
 
-import ChessEngine.Board.gameGrid;
+import Board.gameGrid;
 
 import java.util.ArrayList;
 import java.util.List;

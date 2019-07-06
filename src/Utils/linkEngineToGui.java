@@ -1,4 +1,4 @@
-package ChessEngine.Utils;
+package Utils;
 
 import java.util.ArrayList;
 

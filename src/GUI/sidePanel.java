@@ -1,8 +1,8 @@
-package ChessEngine.GUI;
+package GUI;
 
-import ChessEngine.Pieces.Alliances;
-import ChessEngine.Pieces.Piece;
-import ChessEngine.Pieces.pieceTypes;
+import Pieces.Alliances;
+import Pieces.Piece;
+import Pieces.pieceTypes;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -59,7 +59,7 @@ public class sidePanel extends JPanel {
         Alliances alliance = deadPiece.alliance;
         pieceTypes type = deadPiece.pieceType;
 
-        if(deadPiece != null) {
+        if(deadPiece.pieceType != pieceTypes.EMPTY) {
             if(type == pieceTypes.KNIGHT && alliance == Alliances.BLACK){
                 blackKnightCount++;
             }else if(type == pieceTypes.KNIGHT && alliance == Alliances.WHITE){

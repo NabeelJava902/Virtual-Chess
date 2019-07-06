@@ -1,7 +1,7 @@
-import ChessEngine.Board.gameGrid;
-import ChessEngine.Pieces.Alliances;
-import ChessEngine.Pieces.Bishop;
-import ChessEngine.Pieces.pieceTypes;
+import Board.gameGrid;
+import Pieces.Alliances;
+import Pieces.Bishop;
+import Pieces.pieceTypes;
 
 import java.util.List;
 

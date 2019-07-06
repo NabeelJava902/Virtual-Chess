@@ -1,16 +1,16 @@
-package ChessEngine.Pieces;
+package Pieces;
 
-import ChessEngine.Board.gameGrid;
-import ChessEngine.Utils.gridUtil;
+import Board.gameGrid;
+import Utils.gridUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Queen extends Piece {
+public class Bishop extends Piece {
 
-    private static final int[] MOVE_VECTOR_CANDIDATES = {-9, -8, -7, -1, 1, 7, 8, 9};
+    private final static int[] MOVE_VECTOR_CANDIDATES = {-9, -7, 7, 9};
 
-    public Queen(int location, Alliances alliance, pieceTypes pieceType) {
+    public Bishop(int location, Alliances alliance, pieceTypes pieceType) {
         super(location, alliance, pieceType);
     }
 
@@ -43,19 +43,17 @@ public class Queen extends Piece {
         return validCandidates;
     }
 
-    private static boolean firstColumnExclusion(final int pos, final int moveCandidate){
+    private static boolean eighthColumnExclusion(final int pos, final int moveCandidate){
         boolean exclude = false;
-        if(gridUtil.contains(pos, gridUtil.FIRST_COLUMN) && (moveCandidate == -9 ||
-                moveCandidate == 7 || moveCandidate == -1)){
+        if(gridUtil.contains(pos, gridUtil.EIGHTH_COLUMN) && (moveCandidate == 9 || moveCandidate == -7)){
             exclude = true;
         }
         return  exclude;
     }
 
-    private static boolean eighthColumnExclusion(final int pos, final int moveCandidate){
+    private static boolean firstColumnExclusion(final int pos, final int moveCandidate){
         boolean exclude = false;
-        if(gridUtil.contains(pos, gridUtil.EIGHTH_COLUMN) && (moveCandidate == -7 ||
-                moveCandidate == 9 || moveCandidate == 1)){
+        if(gridUtil.contains(pos, gridUtil.FIRST_COLUMN) && (moveCandidate == -9 || moveCandidate == 7)){
             exclude = true;
         }
         return  exclude;

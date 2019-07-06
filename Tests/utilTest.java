@@ -1,7 +1,7 @@
-import ChessEngine.Pieces.Piece;
-import ChessEngine.Pieces.emptyPiece;
-import ChessEngine.Pieces.pieceTypes;
-import ChessEngine.Utils.gridUtil;
+import Pieces.Piece;
+import Pieces.emptyPiece;
+import Pieces.pieceTypes;
+import Utils.gridUtil;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -1,11 +1,11 @@
-package ChessEngine.GUI;
+package GUI;
 
-import ChessEngine.Board.Move;
-import ChessEngine.Board.gameGrid;
-import ChessEngine.Pieces.Alliances;
-import ChessEngine.Pieces.Piece;
-import ChessEngine.Pieces.pieceTypes;
-import ChessEngine.Utils.*;
+import Board.Move;
+import Board.gameGrid;
+import Pieces.Alliances;
+import Pieces.Piece;
+import Pieces.pieceTypes;
+import Utils.*;
 
 import javax.sound.sampled.Clip;
 import javax.swing.*;
@@ -23,7 +23,8 @@ public class GamePanel extends JFrame {
     protected static Piece pieceAtDestination = null;
     private Color tileShade = new Color(139, 69, 19);
     private gameGrid g = new gameGrid();
-
+    protected static Clip pianoMusic;
+    private static final int MUSIC_DELAY_TIME = 207000;
 
     public GamePanel() {
         super("Chess!");
@@ -59,8 +60,8 @@ public class GamePanel extends JFrame {
             }
         });
 
-        Clip pianoMusic = AudioManager.getLoadedClip("chess_background_music");
-        AudioManager.playMusic(pianoMusic, 207000);
+        pianoMusic = AudioManager.getLoadedClip("chess_background_music");
+        AudioManager.playMusic(pianoMusic, MUSIC_DELAY_TIME);
     }
 
     private void setUpPieces() {
@@ -109,7 +110,7 @@ public class GamePanel extends JFrame {
     private void gameOver(){
         String message = "Check Mate, "+gridUtil.findWinner(pieceTile.piece, g)+" wins.";
         JOptionPane.showMessageDialog(this, message);
-        dispose();
+        System.exit(0);
     }
 
     private class ButtonHandler implements ActionListener {
@@ -170,7 +171,7 @@ public class GamePanel extends JFrame {
                     try {
                         Move move = new Move(linkEngineToGui.arrayToArrayList(iLoc, jLoc), pieceTile.piece);
                         g.emptyPiecesGrid = move.normalMove(g);
-                        if(gridUtil.checkForKingInRange(pieceTile.piece, g)){
+                        if(gridUtil.isCheckMate(pieceTile.piece, g)){
                             gameOver();
                         }
                     }catch(Exception exc){}

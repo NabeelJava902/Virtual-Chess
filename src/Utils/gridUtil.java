@@ -1,9 +1,9 @@
-package ChessEngine.Utils;
+package Utils;
 
-import ChessEngine.Board.gameGrid;
-import ChessEngine.Pieces.Alliances;
-import ChessEngine.Pieces.Piece;
-import ChessEngine.Pieces.pieceTypes;
+import Board.gameGrid;
+import Pieces.Alliances;
+import Pieces.Piece;
+import Pieces.pieceTypes;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -16,6 +16,11 @@ public class gridUtil {
     public static final int[] SECOND_COLUMN = {1, 9, 17, 25, 33, 41, 49, 57};
     public static final int[] SEVENTH_COLUMN = {6, 14, 22, 30, 38, 46, 54, 62};
     public static final int[] EIGHTH_COLUMN = {7, 15, 23, 31, 39, 47, 55, 63};
+    public static final int[] FIRST_ROW = {0, 1, 2, 3, 4, 5, 6, 7};
+    public static final int[] SECOND_ROW = {8, 9, 10, 11, 12, 13, 14, 15};
+    public static final int[] SEVENTH_ROW = {48, 49, 50, 51, 52, 53, 54, 55};
+    public static final int[] EIGHTH_ROW = {56, 57, 58, 59, 60, 61, 62, 63};
+
 
     public static boolean contains(int target, int[] list){
         boolean contains = false;
@@ -41,8 +46,8 @@ public class gridUtil {
 
     public static boolean checkLocationValidity(int location, ArrayList<Piece> grid){
         boolean isValid = false;
-        for(int i=0; i<grid.size(); i++){
-            if(location == grid.get(i).location){isValid=true;}
+        for(Piece piece : grid){
+            if(location == grid.get(piece.location).location){isValid=true;}
         }
         return isValid;
     }
@@ -86,15 +91,59 @@ public class gridUtil {
         }
     }
 
-    public static boolean checkForKingInRange(Piece piece, gameGrid g){
+    public static boolean isCheckMate(Piece piece, gameGrid g){
         //TODO fix functionality in detecting king in legalMoves
-        boolean kingInRange = false;
+        boolean checkMate = false;
+        Piece kingPiece;
+
         for(int i : pieceUtil.getValidDestinations(piece, g)){
-            if(g.emptyPiecesGrid.get(i).pieceType == pieceTypes.KING && g.emptyPiecesGrid.get(i).alliance != piece.alliance){
-                kingInRange = true;
+            if(g.emptyPiecesGrid.get(i).pieceType == pieceTypes.KING){
+                kingPiece = g.emptyPiecesGrid.get(i);
+                for(Piece chessPiece : g.emptyPiecesGrid){
+                    if(contains(kingPiece.location, pieceUtil.getValidDestinations(chessPiece, g))){
+                        //check has occurred
+                        if(isKingTrapped(kingPiece, g)){
+                            checkMate = true;
+                        }
+                    }
+                }
             }
         }
-        return kingInRange;
+        return checkMate;
+    }
+
+    private static boolean isKingTrapped(Piece kingPiece, gameGrid g){
+        boolean kingTrapped = false;
+        List<Integer> validDestinationCompilation = new ArrayList<>();
+
+        for(Piece piece : g.emptyPiecesGrid){
+            if(kingPiece.alliance == Alliances.WHITE){
+                if(piece.alliance == Alliances.BLACK){
+                    validDestinationCompilation.addAll(pieceUtil.getValidDestinations(piece, g));
+                }
+            }else if(kingPiece.alliance == Alliances.BLACK){
+                if(piece.alliance == Alliances.WHITE){
+                    validDestinationCompilation.addAll(pieceUtil.getValidDestinations(piece, g));
+                }
+            }
+        }
+
+        if(containsAllElements(validDestinationCompilation, pieceUtil.getValidDestinations(kingPiece, g))){
+            kingTrapped = true;
+        }
+
+        return kingTrapped;
+    }
+
+    private static boolean containsAllElements(List<Integer> list, List<Integer> list2){
+        boolean containsAllElements = true;
+
+        for(int i : list2){
+            if(!contains(i, list)){
+                containsAllElements = false;
+            }
+        }
+        return containsAllElements;
     }
 
     public static Alliances findWinner(Piece piece, gameGrid g){

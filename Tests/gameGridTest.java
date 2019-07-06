@@ -1,4 +1,4 @@
-import ChessEngine.Board.gameGrid;
+import Board.gameGrid;
 
 public class gameGridTest {
     public static void main(String[] args){

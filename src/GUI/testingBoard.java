@@ -1,10 +1,10 @@
-package ChessEngine.GUI;
+package GUI;
 
-import ChessEngine.Board.Move;
-import ChessEngine.Board.gameGrid;
-import ChessEngine.Pieces.Alliances;
-import ChessEngine.Pieces.Piece;
-import ChessEngine.Utils.*;
+import Board.Move;
+import Board.gameGrid;
+import Pieces.Alliances;
+import Pieces.Piece;
+import Utils.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,14 +56,18 @@ public class testingBoard extends JFrame{
     }
 
     private void setUpPieces(){
-        setPiece(32, dataUtil.blackPawn);
-        setPiece(35, dataUtil.whitePawn);
-        setPiece(43, dataUtil.blackKnight);
-        setPiece(12, dataUtil.blackQueen);
-        setPiece(34, dataUtil.blackKing);
-        setPiece(5, dataUtil.blackBishop);
-        setPiece(9, dataUtil.blackRook);
-        setPiece(11, dataUtil.whiteRook);
+        setPiece(35, dataUtil.blackKing);
+        setPiece(36, dataUtil.whiteRook);
+        setPiece(34, dataUtil.whiteRook);
+        setPiece(43, dataUtil.whiteRook);
+        setPiece(26, dataUtil.whiteRook);
+        setPiece(27, dataUtil.whiteRook);
+        setPiece(28, dataUtil.whiteRook);
+        setPiece(42, dataUtil.whiteRook);
+        setPiece(52, dataUtil.whitePawn);
+        setPiece(4, dataUtil.whitePawn);
+        setPiece(58, dataUtil.blackPawn);
+        setPiece(43, dataUtil.whitePawn);
         gridUtil.printGrid(g);
     }
 
@@ -126,11 +130,9 @@ public class testingBoard extends JFrame{
                     for (int j = 0; j < 8; j++) {
                         if (source == tiles[i][j]) {
                             pieceAtDestination = gridUtil.findPieceFromLocation(linkEngineToGui.arrayToArrayList(i, j), g);
-                            sidePanel.updateText();
                             processClick(i, j);
                             iLoc = i;
                             jLoc = j;
-                            switchTurn(i, j);
                             removeHighlight();
                         }
                     }
@@ -141,13 +143,6 @@ public class testingBoard extends JFrame{
                     gridUtil.printGrid(g);
                 }catch(Exception exc){}
                 pieceTile = null;
-            }
-        }
-
-        private void switchTurn(int i, int j){
-            if (tiles[i][j].getBackground() == Color.GREEN) {
-                String turn = (activeTurnPanel.activeTurn.getText().equals("WHITE TURN")) ? "BLACK TURN" : "WHITE TURN";
-                activeTurnPanel.activeTurn.setText(turn);
             }
         }
 

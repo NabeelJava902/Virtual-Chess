@@ -1,4 +1,4 @@
-package ChessEngine.Pieces;
+package Pieces;
 
 public enum pieceTypes {
     KNIGHT,

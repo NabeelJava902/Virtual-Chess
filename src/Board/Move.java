@@ -1,8 +1,8 @@
-package ChessEngine.Board;
+package Board;
 
-import ChessEngine.Pieces.Alliances;
-import ChessEngine.Pieces.Piece;
-import ChessEngine.Pieces.pieceTypes;
+import Pieces.Alliances;
+import Pieces.Piece;
+import Pieces.pieceTypes;
 
 import java.util.ArrayList;
 

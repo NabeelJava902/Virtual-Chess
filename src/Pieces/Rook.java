@@ -1,16 +1,16 @@
-package ChessEngine.Pieces;
+package Pieces;
 
-import ChessEngine.Board.gameGrid;
-import ChessEngine.Utils.gridUtil;
+import Board.gameGrid;
+import Utils.gridUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Bishop extends Piece {
+public class Rook extends Piece {
 
-    private final static int[] MOVE_VECTOR_CANDIDATES = {-9, -7, 7, 9};
+    private static int[] MOVE_VECTOR_CANDIDATES = {-8, -1, 1, 8};
 
-    public Bishop(int location, Alliances alliance, pieceTypes pieceType) {
+    public Rook(int location, Alliances alliance, pieceTypes pieceType) {
         super(location, alliance, pieceType);
     }
 
@@ -32,20 +32,20 @@ public class Bishop extends Piece {
                 }else if(g.emptyPiecesGrid.get(destination).alliance == this.alliance){
                     break;
                 }
-                if (gridUtil.contains(destination, gridUtil.FIRST_COLUMN) || gridUtil.contains(destination, gridUtil.EIGHTH_COLUMN)) {
+                if (gridUtil.contains(destination, gridUtil.FIRST_COLUMN) && !gridUtil.contains(this.location, gridUtil.FIRST_COLUMN)){
+                    break;
+                }else if(gridUtil.contains(destination, gridUtil.EIGHTH_COLUMN) && !gridUtil.contains(this.location, gridUtil.EIGHTH_COLUMN)){
                     break;
                 }
                 nextMove += currentMove;
                 destination = this.location + nextMove;
             }
         }
-
         return validCandidates;
     }
-
     private static boolean eighthColumnExclusion(final int pos, final int moveCandidate){
         boolean exclude = false;
-        if(gridUtil.contains(pos, gridUtil.EIGHTH_COLUMN) && (moveCandidate == 9 || moveCandidate == -7)){
+        if(gridUtil.contains(pos, gridUtil.EIGHTH_COLUMN) && (moveCandidate == 1)){
             exclude = true;
         }
         return  exclude;
@@ -53,7 +53,7 @@ public class Bishop extends Piece {
 
     private static boolean firstColumnExclusion(final int pos, final int moveCandidate){
         boolean exclude = false;
-        if(gridUtil.contains(pos, gridUtil.FIRST_COLUMN) && (moveCandidate == -9 || moveCandidate == 7)){
+        if(gridUtil.contains(pos, gridUtil.FIRST_COLUMN) && (moveCandidate == -1)){
             exclude = true;
         }
         return  exclude;

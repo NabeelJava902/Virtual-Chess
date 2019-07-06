@@ -1,4 +1,4 @@
-package ChessEngine.Utils;
+package Utils;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -29,7 +29,9 @@ public class AudioManager {
                 TimerTask startMusic = new TimerTask() {
                     @Override
                     public void run() {
-                        music.start();
+                        if(dataUtil.SOUND_SETTTING.equals("ON")) {
+                            music.start();
+                        }
                     }
                 };
                 music.start();

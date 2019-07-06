@@ -1,6 +1,6 @@
-package ChessEngine.Utils;
+package Utils;
 
-import ChessEngine.Pieces.*;
+import Pieces.*;
 
 import javax.swing.*;
 

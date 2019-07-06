@@ -12,7 +12,7 @@ public class AudioManager {
         Clip clip = null;
         try {
             clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(new File("data/"+fileName+".wav")));
+            clip.open(AudioSystem.getAudioInputStream(new File("res/"+fileName+".wav")));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -29,7 +29,7 @@ public class AudioManager {
                 TimerTask startMusic = new TimerTask() {
                     @Override
                     public void run() {
-                        if(dataUtil.SOUND_SETTTING.equals("ON")) {
+                        if(dataUtil.SOUND_SETTING.equals("ON")) {
                             music.start();
                         }
                     }
@@ -38,10 +38,10 @@ public class AudioManager {
                 timer.schedule(startMusic, delay);
 
                 do {
-                    if(dataUtil.SOUND_SETTTING.equals("OFF")){
+                    if(dataUtil.SOUND_SETTING.equals("OFF")){
                         music.stop();
                     }
-                }while (!dataUtil.SOUND_SETTTING.equals("OFF"));
+                }while (!dataUtil.SOUND_SETTING.equals("OFF"));
             }
         }
         Thread audioThread = new Thread(new runAudio());

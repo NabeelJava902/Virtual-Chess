@@ -13,7 +13,7 @@ public class activeTurnPanel extends JPanel {
     protected activeTurnPanel(){
         activeTurn = new JLabel();
         resetButton = new JButton("RESET");
-        soundButton = new JButton("AUDIO: " + dataUtil.SOUND_SETTTING);
+        soundButton = new JButton("AUDIO: " + dataUtil.SOUND_SETTING);
         activeTurn.setText(dataUtil.ACTIVE_TURN);
         setLayout(new FlowLayout());
 
@@ -32,9 +32,9 @@ public class activeTurnPanel extends JPanel {
     }
 
     private void switchSoundSetting(){
-        dataUtil.SOUND_SETTTING = (dataUtil.SOUND_SETTTING.equals("ON")) ? "OFF" : "ON";
-        soundButton.setText("AUDIO: " + dataUtil.SOUND_SETTTING);
-        if(dataUtil.SOUND_SETTTING.equals("OFF")){
+        dataUtil.SOUND_SETTING = (dataUtil.SOUND_SETTING.equals("ON")) ? "OFF" : "ON";
+        soundButton.setText("AUDIO: " + dataUtil.SOUND_SETTING);
+        if(dataUtil.SOUND_SETTING.equals("OFF")){
             GamePanel.pianoMusic.stop();
         }else {
             GamePanel.pianoMusic.start();

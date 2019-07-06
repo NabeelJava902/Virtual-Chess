@@ -152,7 +152,7 @@ public class GamePanel extends JFrame {
 
                                 try {
                                     if (pieceAtDestination.pieceType != pieceTypes.EMPTY && pieceAtDestination.alliance != pieceTile.piece.alliance
-                                            && dataUtil.SOUND_SETTTING.equals("ON")) {
+                                            && dataUtil.SOUND_SETTING.equals("ON")) {
                                         class runAudio implements Runnable {
 
                                             @Override

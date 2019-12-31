@@ -68,6 +68,7 @@ public class testingBoard extends JFrame{
         setPiece(4, dataUtil.whitePawn);
         setPiece(58, dataUtil.blackPawn);
         setPiece(43, dataUtil.whitePawn);
+        setPiece(23, dataUtil.blackQueen);
         gridUtil.printGrid(g);
     }
 
@@ -140,6 +141,7 @@ public class testingBoard extends JFrame{
                 try {
                     Move move = new Move(linkEngineToGui.arrayToArrayList(iLoc, jLoc), pieceTile.piece);
                     g.emptyPiecesGrid = move.normalMove(g);
+                    gridUtil.isCheckMate(pieceTile.piece, g);
                     gridUtil.printGrid(g);
                 }catch(Exception exc){}
                 pieceTile = null;

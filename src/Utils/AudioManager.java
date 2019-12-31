@@ -18,10 +18,8 @@ public class AudioManager {
         }
         return clip;
     }
-
     public static void playMusic(Clip music, long delay){
         class runAudio implements Runnable{
-            //TODO audio needs debugging
             @Override
             public void run() {
                 Timer timer = new Timer();

@@ -29,17 +29,6 @@ public class linkEngineToGui {
     }
 
     public static int arrayToArrayList(int row, int col){
-        int pos = 0;
-
-        for(int i=0; i<8; i++){
-            for(int z=0; z<8; z++){
-                if(i == row && z == col){
-                    break;
-                }
-                pos++;
-            }
-        }
-
-        return pos;
+        return ((row * 8)+8) - (8 - col);
     }
 }

@@ -19,8 +19,8 @@ import java.util.ArrayList;
 public class GamePanel extends JFrame {
 
     private static JButton[][] tiles = new JButton[8][8];
-    private clickedTile pieceTile;
-    protected static Piece pieceAtDestination = null;
+    public static clickedTile pieceTile;
+    public static Piece pieceAtDestination = null;
     private Color tileShade = new Color(139, 69, 19);
     private gameGrid g = new gameGrid();
     protected static Clip pianoMusic;

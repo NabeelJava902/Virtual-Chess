@@ -38,51 +38,52 @@ public class sidePanel extends JPanel {
         blackKingText = new JLabel();
 
         add(button);
-        add(whiteKnightText);
-        add(whitePawnText);
-        add(whiteRookText);
-        add(whiteBishopText);
-        add(whiteQueenText);
-        add(whiteKingText);
         add(blackKnightText);
         add(blackPawnText);
         add(blackRookText);
         add(blackBishopText);
         add(blackQueenText);
         add(blackKingText);
+        add(whiteKnightText);
+        add(whitePawnText);
+        add(whiteRookText);
+        add(whiteBishopText);
+        add(whiteQueenText);
+        add(whiteKingText);
 
         updateGraveyard();
     }
 
     protected static void updateText(){
         Piece deadPiece = GamePanel.pieceAtDestination;
+        Piece movingPiece = GamePanel.pieceTile.piece;
         Alliances alliance = deadPiece.alliance;
         pieceTypes type = deadPiece.pieceType;
 
         if(deadPiece.pieceType != pieceTypes.EMPTY) {
-            if(type == pieceTypes.KNIGHT && alliance == Alliances.BLACK){
+            if(type == pieceTypes.KNIGHT && alliance == Alliances.BLACK && movingPiece.alliance != Alliances.BLACK){
                 blackKnightCount++;
-            }else if(type == pieceTypes.KNIGHT && alliance == Alliances.WHITE){
+            }else if(type == pieceTypes.KNIGHT && alliance == Alliances.WHITE && movingPiece.alliance != Alliances.WHITE){
                 whiteKnightCount++;
-            }else if(type == pieceTypes.BISHOP && alliance == Alliances.BLACK){
+            }else if(type == pieceTypes.BISHOP && alliance == Alliances.BLACK && movingPiece.alliance != Alliances.BLACK){
                 blackBishopCount++;
-            }else if(type == pieceTypes.BISHOP && alliance == Alliances.WHITE){
+            }else if(type == pieceTypes.BISHOP && alliance == Alliances.WHITE && movingPiece.alliance != Alliances.WHITE){
                 whiteBishopCount++;
-            }else if(type == pieceTypes.ROOK && alliance == Alliances.BLACK){
+            }else if(type == pieceTypes.ROOK && alliance == Alliances.BLACK && movingPiece.alliance != Alliances.BLACK){
                 blackRookCount++;
-            }else if(type == pieceTypes.ROOK && alliance == Alliances.WHITE){
+            }else if(type == pieceTypes.ROOK && alliance == Alliances.WHITE && movingPiece.alliance != Alliances.WHITE){
                 whiteRookCount++;
-            }else if(type == pieceTypes.PAWN && alliance == Alliances.BLACK){
+            }else if(type == pieceTypes.PAWN && alliance == Alliances.BLACK && movingPiece.alliance != Alliances.BLACK){
                 blackPawnCount++;
-            }else if(type == pieceTypes.PAWN && alliance == Alliances.WHITE){
+            }else if(type == pieceTypes.PAWN && alliance == Alliances.WHITE && movingPiece.alliance != Alliances.WHITE){
                 whitePawnCount++;
-            }else if(type == pieceTypes.KING && alliance == Alliances.BLACK){
+            }else if(type == pieceTypes.KING && alliance == Alliances.BLACK && movingPiece.alliance != Alliances.BLACK){
                 blackKingCount++;
-            }else if(type == pieceTypes.KING && alliance == Alliances.WHITE){
+            }else if(type == pieceTypes.KING && alliance == Alliances.WHITE && movingPiece.alliance != Alliances.WHITE){
                 whiteKingCount++;
-            }else if(type == pieceTypes.QUEEN && alliance == Alliances.BLACK){
+            }else if(type == pieceTypes.QUEEN && alliance == Alliances.BLACK && movingPiece.alliance != Alliances.BLACK){
                 blackQueenCount++;
-            }else if(type == pieceTypes.QUEEN && alliance == Alliances.WHITE){
+            }else if(type == pieceTypes.QUEEN && alliance == Alliances.WHITE && movingPiece.alliance != Alliances.WHITE){
                 whiteQueenCount++;
             }
             updateGraveyard();

@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static Pieces.Alliances.BLACK;
+import static Pieces.Alliances.WHITE;
+import static Utils.pieceUtil.getValidDestinations;
+
 public class gridUtil {
 
     public static final int[] FIRST_COLUMN = {0, 8, 16, 24, 32, 40, 48, 56};
@@ -92,43 +96,45 @@ public class gridUtil {
     }
 
     public static boolean isCheckMate(Piece piece, gameGrid g){
-        //TODO fix functionality in detecting king in legalMoves
         boolean checkMate = false;
         Piece kingPiece;
 
-        for(int i : pieceUtil.getValidDestinations(piece, g)){
+        for(int i : getValidDestinations(piece, g)){
             if(g.emptyPiecesGrid.get(i).pieceType == pieceTypes.KING){
                 kingPiece = g.emptyPiecesGrid.get(i);
-                for(Piece chessPiece : g.emptyPiecesGrid){
-                    if(contains(kingPiece.location, pieceUtil.getValidDestinations(chessPiece, g))){
-                        //check has occurred
-                        if(isKingTrapped(kingPiece, g)){
-                            checkMate = true;
-                        }
-                    }
+                if(isKingTrapped(kingPiece, g)){
+                    checkMate = true;
                 }
             }
         }
         return checkMate;
     }
 
+    //TODO fix bug in method below
     private static boolean isKingTrapped(Piece kingPiece, gameGrid g){
         boolean kingTrapped = false;
         List<Integer> validDestinationCompilation = new ArrayList<>();
 
-        for(Piece piece : g.emptyPiecesGrid){
-            if(kingPiece.alliance == Alliances.WHITE){
-                if(piece.alliance == Alliances.BLACK){
-                    validDestinationCompilation.addAll(pieceUtil.getValidDestinations(piece, g));
+        switch(kingPiece.alliance){
+            case WHITE:
+                //for all black pieces on board
+                for(Piece piece : g.emptyPiecesGrid){
+                    if(piece.alliance == BLACK){
+                        validDestinationCompilation.addAll(getValidDestinations(piece, g));
+                    }
                 }
-            }else if(kingPiece.alliance == Alliances.BLACK){
-                if(piece.alliance == Alliances.WHITE){
-                    validDestinationCompilation.addAll(pieceUtil.getValidDestinations(piece, g));
+                break;
+            case BLACK:
+                //for all white pieces on board
+                for(Piece piece : g.emptyPiecesGrid){
+                    if(piece.alliance == WHITE){
+                        validDestinationCompilation.addAll(getValidDestinations(piece, g));
+                    }
                 }
-            }
+                break;
         }
 
-        if(containsAllElements(validDestinationCompilation, pieceUtil.getValidDestinations(kingPiece, g))){
+        if(containsAllElements(validDestinationCompilation, getValidDestinations(kingPiece, g))){
             kingTrapped = true;
         }
 
@@ -148,12 +154,12 @@ public class gridUtil {
 
     public static Alliances findWinner(Piece piece, gameGrid g){
         Alliances winner = null;
-        for(int i : pieceUtil.getValidDestinations(piece, g)){
+        for(int i : getValidDestinations(piece, g)){
             if(g.emptyPiecesGrid.get(i).pieceType == pieceTypes.KING && g.emptyPiecesGrid.get(i).alliance != piece.alliance){
-                if(g.emptyPiecesGrid.get(i).alliance == Alliances.BLACK){
-                    winner = Alliances.BLACK;
-                }else if(g.emptyPiecesGrid.get(i).alliance == Alliances.WHITE){
-                    winner = Alliances.WHITE;
+                if(g.emptyPiecesGrid.get(i).alliance == BLACK){
+                    winner = BLACK;
+                }else if(g.emptyPiecesGrid.get(i).alliance == WHITE){
+                    winner = WHITE;
                 }
             }
         }

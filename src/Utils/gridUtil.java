@@ -1,18 +1,16 @@
 package Utils;
 
 import Board.gameGrid;
-import Pieces.Alliances;
+import Pieces.Alliance;
 import Pieces.Piece;
-import Pieces.pieceTypes;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static Pieces.Alliances.BLACK;
-import static Pieces.Alliances.WHITE;
-import static Utils.pieceUtil.getValidDestinations;
+import static Pieces.Alliance.BLACK;
+import static Pieces.Alliance.WHITE;
 
 public class gridUtil {
 
@@ -95,74 +93,7 @@ public class gridUtil {
         }
     }
 
-    public static boolean isCheckMate(Piece piece, gameGrid g){
-        boolean checkMate = false;
-        Piece kingPiece;
-
-        for(int i : getValidDestinations(piece, g)){
-            if(g.emptyPiecesGrid.get(i).pieceType == pieceTypes.KING){
-                kingPiece = g.emptyPiecesGrid.get(i);
-                if(isKingTrapped(kingPiece, g)){
-                    checkMate = true;
-                }
-            }
-        }
-        return checkMate;
-    }
-
-    //TODO fix bug in method below
-    private static boolean isKingTrapped(Piece kingPiece, gameGrid g){
-        boolean kingTrapped = false;
-        List<Integer> validDestinationCompilation = new ArrayList<>();
-
-        switch(kingPiece.alliance){
-            case WHITE:
-                //for all black pieces on board
-                for(Piece piece : g.emptyPiecesGrid){
-                    if(piece.alliance == BLACK){
-                        validDestinationCompilation.addAll(getValidDestinations(piece, g));
-                    }
-                }
-                break;
-            case BLACK:
-                //for all white pieces on board
-                for(Piece piece : g.emptyPiecesGrid){
-                    if(piece.alliance == WHITE){
-                        validDestinationCompilation.addAll(getValidDestinations(piece, g));
-                    }
-                }
-                break;
-        }
-
-        if(containsAllElements(validDestinationCompilation, getValidDestinations(kingPiece, g))){
-            kingTrapped = true;
-        }
-
-        return kingTrapped;
-    }
-
-    private static boolean containsAllElements(List<Integer> list, List<Integer> list2){
-        boolean containsAllElements = true;
-
-        for(int i : list2){
-            if(!contains(i, list)){
-                containsAllElements = false;
-            }
-        }
-        return containsAllElements;
-    }
-
-    public static Alliances findWinner(Piece piece, gameGrid g){
-        Alliances winner = null;
-        for(int i : getValidDestinations(piece, g)){
-            if(g.emptyPiecesGrid.get(i).pieceType == pieceTypes.KING && g.emptyPiecesGrid.get(i).alliance != piece.alliance){
-                if(g.emptyPiecesGrid.get(i).alliance == BLACK){
-                    winner = BLACK;
-                }else if(g.emptyPiecesGrid.get(i).alliance == WHITE){
-                    winner = WHITE;
-                }
-            }
-        }
-        return winner;
+    public static Alliance findWinner(Piece killedKing){
+        return (killedKing.alliance == BLACK) ? WHITE:BLACK;
     }
 }

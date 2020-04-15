@@ -4,10 +4,13 @@ import Pieces.*;
 
 import javax.swing.*;
 
+import static Pieces.Alliance.BLACK;
+import static Pieces.Alliance.WHITE;
+
 public class clickedTile {
-    public Piece piece;
-    public Icon img;
-    public int row, col;
+    public final Piece piece;
+    public final Icon img;
+    public final int row, col;
 
     private clickedTile(Piece piece, Icon img, int i, int j){
         this.piece = piece;
@@ -23,40 +26,40 @@ public class clickedTile {
         int j = linkEngineToGui.arrayListToArray(clickedTileLocation).get(1);
 
         if(buttonImg == dataUtil.blackKnight){
-            clickedTile = new clickedTile(new Knight(clickedTileLocation, Alliances.BLACK, pieceTypes.KNIGHT),
+            clickedTile = new clickedTile(new Knight(clickedTileLocation, BLACK, pieceTypes.KNIGHT),
                     buttonImg, i, j);
         }else if(buttonImg == dataUtil.whiteKnight){
-            clickedTile = new clickedTile(new Knight(clickedTileLocation, Alliances.WHITE, pieceTypes.KNIGHT),
+            clickedTile = new clickedTile(new Knight(clickedTileLocation, WHITE, pieceTypes.KNIGHT),
                     buttonImg, i, j);
         }else if(buttonImg == dataUtil.blackBishop){
-            clickedTile = new clickedTile(new Bishop(clickedTileLocation, Alliances.BLACK, pieceTypes.BISHOP),
+            clickedTile = new clickedTile(new Bishop(clickedTileLocation, BLACK, pieceTypes.BISHOP),
                     buttonImg, i, j);
         }else if(buttonImg == dataUtil.whiteBishop){
-            clickedTile = new clickedTile(new Bishop(clickedTileLocation, Alliances.WHITE, pieceTypes.BISHOP),
+            clickedTile = new clickedTile(new Bishop(clickedTileLocation, WHITE, pieceTypes.BISHOP),
                     buttonImg, i, j);
         }else if(buttonImg == dataUtil.blackRook){
-            clickedTile = new clickedTile(new Rook(clickedTileLocation, Alliances.BLACK, pieceTypes.ROOK),
+            clickedTile = new clickedTile(new Rook(clickedTileLocation, BLACK, pieceTypes.ROOK),
                     buttonImg, i, j);
         }else if(buttonImg == dataUtil.whiteRook){
-            clickedTile = new clickedTile(new Rook(clickedTileLocation, Alliances.WHITE, pieceTypes.ROOK),
+            clickedTile = new clickedTile(new Rook(clickedTileLocation, WHITE, pieceTypes.ROOK),
                     buttonImg, i, j);
         }else if(buttonImg == dataUtil.blackKing){
-            clickedTile = new clickedTile(new King(clickedTileLocation, Alliances.BLACK, pieceTypes.KING),
+            clickedTile = new clickedTile(new King(clickedTileLocation, BLACK, pieceTypes.KING),
                     buttonImg, i, j);
         }else if(buttonImg == dataUtil.whiteKing){
-            clickedTile = new clickedTile(new King(clickedTileLocation, Alliances.WHITE, pieceTypes.KING),
+            clickedTile = new clickedTile(new King(clickedTileLocation, WHITE, pieceTypes.KING),
                     buttonImg, i, j);
         }else if(buttonImg == dataUtil.blackQueen){
-            clickedTile = new clickedTile(new Queen(clickedTileLocation, Alliances.BLACK, pieceTypes.QUEEN),
+            clickedTile = new clickedTile(new Queen(clickedTileLocation, BLACK, pieceTypes.QUEEN),
                     buttonImg, i, j);
         }else if(buttonImg == dataUtil.whiteQueen){
-            clickedTile = new clickedTile(new Queen(clickedTileLocation, Alliances.WHITE, pieceTypes.QUEEN),
+            clickedTile = new clickedTile(new Queen(clickedTileLocation, WHITE, pieceTypes.QUEEN),
                     buttonImg, i, j);
         }else if(buttonImg == dataUtil.blackPawn){
-            clickedTile = new clickedTile(new Pawn(clickedTileLocation, Alliances.BLACK, pieceTypes.PAWN),
+            clickedTile = new clickedTile(new Pawn(clickedTileLocation, BLACK, pieceTypes.PAWN),
                     buttonImg, i, j);
         }else if(buttonImg == dataUtil.whitePawn){
-            clickedTile = new clickedTile(new Pawn(clickedTileLocation, Alliances.WHITE, pieceTypes.PAWN),
+            clickedTile = new clickedTile(new Pawn(clickedTileLocation, WHITE, pieceTypes.PAWN),
                     buttonImg, i, j);
         }
         return clickedTile;

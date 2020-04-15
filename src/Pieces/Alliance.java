@@ -1,6 +1,6 @@
 package Pieces;
 
-public enum Alliances {
+public enum Alliance {
     WHITE,
     BLACK,
     EMPTY

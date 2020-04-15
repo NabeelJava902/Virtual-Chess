@@ -10,7 +10,7 @@ public class Knight extends Piece{
 
     private static int[] MOVE_CANDIDATES = {-10, -17, -15, -6, 6, 15, 17, 10};
 
-    public Knight(int location, Alliances alliance, pieceTypes pieceType) {
+    public Knight(int location, Alliance alliance, pieceTypes pieceType) {
         super(location, alliance, pieceType);
     }
 

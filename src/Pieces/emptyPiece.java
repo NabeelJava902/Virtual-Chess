@@ -7,7 +7,7 @@ import java.util.List;
 
 public class emptyPiece extends Piece {
 
-    public emptyPiece(int location, Alliances alliance, pieceTypes pieceType) {
+    public emptyPiece(int location, Alliance alliance, pieceTypes pieceType) {
         super(location, alliance, pieceType);
     }
 

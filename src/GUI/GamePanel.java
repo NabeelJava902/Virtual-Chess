@@ -2,7 +2,6 @@ package GUI;
 
 import Board.Move;
 import Board.gameGrid;
-import Pieces.Alliances;
 import Pieces.Piece;
 import Pieces.pieceTypes;
 import Utils.*;
@@ -16,13 +15,16 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
+import static Pieces.Alliance.BLACK;
+import static Pieces.Alliance.WHITE;
+
 public class GamePanel extends JFrame {
 
-    private static JButton[][] tiles = new JButton[8][8];
+    private static final JButton[][] tiles = new JButton[8][8];
     public static clickedTile pieceTile;
     public static Piece pieceAtDestination = null;
-    private Color tileShade = new Color(139, 69, 19);
-    private gameGrid g = new gameGrid();
+    private final Color tileShade = new Color(139, 69, 19);
+    private final gameGrid g = new gameGrid();
     protected static Clip pianoMusic;
     private static final int MUSIC_DELAY_TIME = 207000;
 
@@ -108,7 +110,7 @@ public class GamePanel extends JFrame {
     }
 
     private void gameOver(){
-        String message = "Check Mate, "+gridUtil.findWinner(pieceTile.piece, g)+" wins.";
+        String message = gridUtil.findWinner(pieceAtDestination)+" wins.";
         JOptionPane.showMessageDialog(this, message);
         System.exit(0);
     }
@@ -122,12 +124,12 @@ public class GamePanel extends JFrame {
                     for (int i = 0; i < 8; i++) {
                         for (int j = 0; j < 8; j++) {
                             if (source == tiles[i][j]) {
-                                if(g.emptyPiecesGrid.get(linkEngineToGui.arrayToArrayList(i, j)).alliance == Alliances.BLACK && activeTurnPanel.activeTurn.getText().equals("BLACK TURN")) {
+                                if(g.emptyPiecesGrid.get(linkEngineToGui.arrayToArrayList(i, j)).alliance == BLACK && activeTurnPanel.activeTurn.getText().equals("BLACK TURN")) {
                                     pieceTile = clickedTile.assignClickedTile(linkEngineToGui.arrayToArrayList(i, j), tiles[i][j]);
                                     try {
                                         highlightValidMove(pieceTile.piece);
                                     }catch (Exception ex) {}
-                                }else if(g.emptyPiecesGrid.get(linkEngineToGui.arrayToArrayList(i, j)).alliance == Alliances.WHITE && activeTurnPanel.activeTurn.getText().equals("WHITE TURN")){
+                                }else if(g.emptyPiecesGrid.get(linkEngineToGui.arrayToArrayList(i, j)).alliance == WHITE && activeTurnPanel.activeTurn.getText().equals("WHITE TURN")){
                                     pieceTile = clickedTile.assignClickedTile(linkEngineToGui.arrayToArrayList(i, j), tiles[i][j]);
                                     try {
                                         highlightValidMove(pieceTile.piece);
@@ -170,10 +172,11 @@ public class GamePanel extends JFrame {
                     }
                     try {
                         Move move = new Move(linkEngineToGui.arrayToArrayList(iLoc, jLoc), pieceTile.piece);
-                        g.emptyPiecesGrid = move.normalMove(g);
-                        if(gridUtil.isCheckMate(pieceTile.piece, g)){
+                        System.out.println(pieceAtDestination.pieceType);
+                        if(pieceAtDestination.pieceType == pieceTypes.KING){
                             gameOver();
                         }
+                        g.emptyPiecesGrid = move.normalMove(g);
                     }catch(Exception exc){}
                     pieceTile = null;
                 }

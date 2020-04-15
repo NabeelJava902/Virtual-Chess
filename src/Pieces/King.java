@@ -9,7 +9,7 @@ import java.util.List;
 public class King extends Piece {
     private static final int[] MOVE_CANDIDATES = {-9, -8, -7, -1, 1, 7, 8, 9};
 
-    public King(int location, Alliances alliance, pieceTypes pieceType) {
+    public King(int location, Alliance alliance, pieceTypes pieceType) {
         super(location, alliance, pieceType);
     }
 

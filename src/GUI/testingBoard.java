@@ -2,7 +2,6 @@ package GUI;
 
 import Board.Move;
 import Board.gameGrid;
-import Pieces.Alliances;
 import Pieces.Piece;
 import Utils.*;
 
@@ -13,6 +12,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+
+import static Pieces.Alliance.BLACK;
+import static Pieces.Alliance.WHITE;
 
 public class testingBoard extends JFrame{
     private static JButton[][] tiles = new JButton[8][8];
@@ -110,12 +112,12 @@ public class testingBoard extends JFrame{
                 for (int i = 0; i < 8; i++) {
                     for (int j = 0; j < 8; j++) {
                         if (source == tiles[i][j]) {
-                            if(g.emptyPiecesGrid.get(linkEngineToGui.arrayToArrayList(i, j)).alliance == Alliances.BLACK) {
+                            if(g.emptyPiecesGrid.get(linkEngineToGui.arrayToArrayList(i, j)).alliance == BLACK) {
                                 pieceTile = clickedTile.assignClickedTile(linkEngineToGui.arrayToArrayList(i, j), tiles[i][j]);
                                 try {
                                     highlightValidMove(pieceTile.piece);
                                 }catch (Exception ex) {}
-                            }else if(g.emptyPiecesGrid.get(linkEngineToGui.arrayToArrayList(i, j)).alliance == Alliances.WHITE){
+                            }else if(g.emptyPiecesGrid.get(linkEngineToGui.arrayToArrayList(i, j)).alliance == WHITE){
                                 pieceTile = clickedTile.assignClickedTile(linkEngineToGui.arrayToArrayList(i, j), tiles[i][j]);
                                 try {
                                     highlightValidMove(pieceTile.piece);
@@ -141,7 +143,6 @@ public class testingBoard extends JFrame{
                 try {
                     Move move = new Move(linkEngineToGui.arrayToArrayList(iLoc, jLoc), pieceTile.piece);
                     g.emptyPiecesGrid = move.normalMove(g);
-                    gridUtil.isCheckMate(pieceTile.piece, g);
                     gridUtil.printGrid(g);
                 }catch(Exception exc){}
                 pieceTile = null;

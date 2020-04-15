@@ -10,7 +10,7 @@ public class Rook extends Piece {
 
     private static int[] MOVE_VECTOR_CANDIDATES = {-8, -1, 1, 8};
 
-    public Rook(int location, Alliances alliance, pieceTypes pieceType) {
+    public Rook(int location, Alliance alliance, pieceTypes pieceType) {
         super(location, alliance, pieceType);
     }
 

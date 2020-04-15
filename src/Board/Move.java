@@ -1,6 +1,6 @@
 package Board;
 
-import Pieces.Alliances;
+import Pieces.Alliance;
 import Pieces.Piece;
 import Pieces.pieceTypes;
 
@@ -20,7 +20,7 @@ public class Move {
         g.emptyPiecesGrid.get(validDestination).pieceType = movingPiece.pieceType;
         g.emptyPiecesGrid.get((validDestination)).alliance = movingPiece.alliance;
         movingPiece.location = validDestination;
-        g.emptyPiecesGrid.get(loc).alliance = Alliances.EMPTY;
+        g.emptyPiecesGrid.get(loc).alliance = Alliance.EMPTY;
         g.emptyPiecesGrid.get(loc).pieceType = pieceTypes.EMPTY;
         g.emptyPiecesGrid.get(loc).MOVE_CANDIDATES = null;
 

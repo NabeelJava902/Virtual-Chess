@@ -7,11 +7,11 @@ import java.util.List;
 
 public abstract class Piece {
     public int location;
-    public Alliances alliance;
+    public Alliance alliance;
     public pieceTypes pieceType;
     public int[] MOVE_CANDIDATES;
 
-    Piece(int location, Alliances alliance, pieceTypes pieceType){
+    Piece(int location, Alliance alliance, pieceTypes pieceType){
         this.location = location;
         this.alliance = alliance;
         this.pieceType = pieceType;

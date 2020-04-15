@@ -10,7 +10,7 @@ public class Bishop extends Piece {
 
     private final static int[] MOVE_VECTOR_CANDIDATES = {-9, -7, 7, 9};
 
-    public Bishop(int location, Alliances alliance, pieceTypes pieceType) {
+    public Bishop(int location, Alliance alliance, pieceTypes pieceType) {
         super(location, alliance, pieceType);
     }
 

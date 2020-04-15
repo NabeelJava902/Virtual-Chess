@@ -10,7 +10,7 @@ public class Queen extends Piece {
 
     private static final int[] MOVE_VECTOR_CANDIDATES = {-9, -8, -7, -1, 1, 7, 8, 9};
 
-    public Queen(int location, Alliances alliance, pieceTypes pieceType) {
+    public Queen(int location, Alliance alliance, pieceTypes pieceType) {
         super(location, alliance, pieceType);
     }
 

@@ -48,7 +48,7 @@ public class GamePanel extends JFrame {
         }
         add(contents, BorderLayout.CENTER);
         setUpPieces();
-        setSize(1000, 1000);
+        setDimensions();
         setResizable(false);
         setVisible(true);
         setLocationRelativeTo(null);
@@ -115,6 +115,13 @@ public class GamePanel extends JFrame {
         System.exit(0);
     }
 
+    private void setDimensions(){
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        dimension.height -= 50;
+        dimension.width -= 50;
+        setSize(dimension);
+    }
+
     private class ButtonHandler implements ActionListener {
 
             @Override
@@ -172,7 +179,6 @@ public class GamePanel extends JFrame {
                     }
                     try {
                         Move move = new Move(linkEngineToGui.arrayToArrayList(iLoc, jLoc), pieceTile.piece);
-                        System.out.println(pieceAtDestination.pieceType);
                         if(pieceAtDestination.pieceType == pieceTypes.KING){
                             gameOver();
                         }
